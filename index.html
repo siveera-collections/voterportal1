@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Election Monitoring System</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+    }
+    header {
+      background: #003366;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav {
+      background: #0055a5;
+      padding: 10px;
+      text-align: center;
+    }
+    nav button {
+      margin: 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background: #fff;
+      color: #0055a5;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    nav button:hover {
+      background: #ffcc00;
+    }
+    .container {
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .hidden {
+      display: none;
+    }
+    .report-input {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .btn {
+      padding: 8px 15px;
+      background: #0055a5;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #ff9900;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Election Monitoring System</h1>
+    <p>Ensuring Transparency & Inspiring Voters</p>
+  </header>
+
+  <nav>
+    <button onclick="showSection('admin')">Admin</button>
+    <button onclick="showSection('citizen')">Citizen</button>
+    <button onclick="showSection('observer')">Observer</button>
+    <button onclick="showSection('analyst')">Data Analyst</button>
+  </nav>
+
+  <div class="container">
+    <!-- Admin Dashboard -->
+    <div id="admin" class="card hidden">
+      <h2>Admin Dashboard</h2>
+      <p>✔ Manage election system, monitor data, and ensure security.</p>
+      <p><b>Active Elections:</b> 3</p>
+      <p><b>Reported Issues:</b> 5</p>
+    </div>
+
+    <!-- Citizen Dashboard -->
+    <div id="citizen" class="card hidden">
+      <h2>Citizen Dashboard</h2>
+      <p>Track election process, report issues, and engage in civic discussions.</p>
+      <textarea id="issue" class="report-input" placeholder="Report an issue..."></textarea>
+      <button class="btn" onclick="submitIssue()">Submit Report</button>
+      <h3>Live Updates:</h3>
+      <ul id="citizenUpdates">
+        <li>Polling started at 8 AM.</li>
+        <li>Voter turnout: 35% at 11 AM.</li>
+      </ul>
+    </div>
+
+    <!-- Observer Dashboard -->
+    <div id="observer" class="card hidden">
+      <h2>Election Observer Dashboard</h2>
+      <p>Monitor election activities and report anomalies.</p>
+      <button class="btn" onclick="addObserverReport()">Submit Observation</button>
+      <ul id="observerReports">
+        <li>No issues reported at Station 1.</li>
+      </ul>
+    </div>
+
+    <!-- Data Analyst Dashboard -->
+    <div id="analyst" class="card hidden">
+      <h2>Data Analyst Dashboard</h2>
+      <p>Analyze election data and provide real-time updates.</p>
+      <h3>Election Statistics:</h3>
+      <ul id="analytics">
+        <li>Voter turnout: 62%</li>
+        <li>Reports flagged: 3</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function submitIssue() {
+      const issue = document.getElementById("issue").value;
+      if(issue.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = "Citizen Report: " + issue;
+        document.getElementById("citizenUpdates").appendChild(li);
+        document.getElementById("issue").value = "";
+        alert("Issue submitted successfully!");
+      } else {
+        alert("Please enter an issue before submitting.");
+      }
+    }
+
+    function addObserverReport() {
+      const li = document.createElement("li");
+      li.textContent = "Observer Report: All good at station " + Math.floor(Math.random() * 10 + 1);
+      document.getElementById("observerReports").appendChild(li);
+      alert("Observation submitted successfully!");
+    }
+  </script>
+</body>
+</html>
