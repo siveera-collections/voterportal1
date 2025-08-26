@@ -7,14 +7,24 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f9;
+      font-family: "Segoe UI", sans-serif;
+      background: #f8fafc;
+      color: #333;
     }
     header {
       background: #003366;
       color: white;
       padding: 15px;
       text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    header p {
+      margin: 5px 0 0;
+      font-size: 15px;
+      font-style: italic;
     }
     nav {
       background: #0055a5;
@@ -30,50 +40,78 @@
       color: #0055a5;
       font-weight: bold;
       cursor: pointer;
+      transition: 0.3s;
     }
     nav button:hover {
       background: #ffcc00;
+      color: #000;
     }
     .container {
-      padding: 20px;
+      padding: 30px;
+      max-width: 1000px;
+      margin: auto;
     }
     .card {
       background: #fff;
       padding: 20px;
-      margin: 15px 0;
+      margin: 20px 0;
       border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     }
     .hidden {
       display: none;
     }
     .report-input {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
+      font-size: 14px;
     }
     .btn {
-      padding: 8px 15px;
+      padding: 10px 20px;
       background: #0055a5;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: 0.3s;
     }
     .btn:hover {
       background: #ff9900;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    footer {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+    footer p {
+      margin: 5px 0;
+    }
+    footer a {
+      color: #ffcc00;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Election Monitoring System</h1>
-    <p>Ensuring Transparency & Inspiring Voters</p>
+    <p>Ensuring Transparency • Preventing Fraud • Inspiring Voters</p>
   </header>
 
   <nav>
+    <button onclick="showSection('welcome')">Home</button>
     <button onclick="showSection('admin')">Admin</button>
     <button onclick="showSection('citizen')">Citizen</button>
     <button onclick="showSection('observer')">Observer</button>
@@ -81,12 +119,24 @@
   </nav>
 
   <div class="container">
+    <!-- Welcome Section -->
+    <div id="welcome" class="card">
+      <h2>Welcome to Election Monitoring System</h2>
+      <p>
+        This platform is designed to ensure fair, transparent, and secure elections.  
+        Citizens, election observers, administrators, and data analysts can monitor,  
+        report, and analyze election activities in real-time.
+      </p>
+    </div>
+
     <!-- Admin Dashboard -->
     <div id="admin" class="card hidden">
       <h2>Admin Dashboard</h2>
       <p>✔ Manage election system, monitor data, and ensure security.</p>
       <p><b>Active Elections:</b> 3</p>
       <p><b>Reported Issues:</b> 5</p>
+      <button class="btn">Manage Users</button>
+      <button class="btn">View Reports</button>
     </div>
 
     <!-- Citizen Dashboard -->
@@ -121,8 +171,24 @@
         <li>Voter turnout: 62%</li>
         <li>Reports flagged: 3</li>
       </ul>
+      <button class="btn" onclick="addAnalysis()">Run Analysis</button>
     </div>
   </div>
+
+  <footer>
+    <p>&copy; 2025 Election Monitoring System. All Rights Reserved.</p>
+    <p>
+      <a href="#">About</a> | 
+      <a href="#">Contact</a> | 
+      <a href="#">Privacy Policy</a>
+    </p>
+    <p>
+      Follow us: 
+      <a href="#">Facebook</a> • 
+      <a href="#">Twitter</a> • 
+      <a href="#">LinkedIn</a>
+    </p>
+  </footer>
 
   <script>
     function showSection(id) {
@@ -148,6 +214,12 @@
       li.textContent = "Observer Report: All good at station " + Math.floor(Math.random() * 10 + 1);
       document.getElementById("observerReports").appendChild(li);
       alert("Observation submitted successfully!");
+    }
+
+    function addAnalysis() {
+      const li = document.createElement("li");
+      li.textContent = "New analysis result: turnout trend stable at " + (60 + Math.floor(Math.random() * 10)) + "%";
+      document.getElementById("analytics").appendChild(li);
     }
   </script>
 </body>
